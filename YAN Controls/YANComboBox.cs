@@ -329,9 +329,9 @@ namespace YAN_Controls
         //icon paint event
         private void Icon_Paint(object sender, PaintEventArgs e)
         {
-            var iconWidth = 14;
-            var iconHeight = 6;
-            var rectIcon = new Rectangle((_btnIcon.Width - iconWidth) / 2, (_btnIcon.Height - iconHeight) / 2, iconWidth, iconHeight);
+            var wIc = 14;
+            var hIc = 6;
+            var rectIc = new Rectangle((_btnIcon.Width - wIc) / 2, (_btnIcon.Height - hIc) / 2, wIc, hIc);
             var graphics = e.Graphics;
             //draw arrow down icon
             using (var path = new GraphicsPath())
@@ -339,8 +339,8 @@ namespace YAN_Controls
                 using (var pen = new Pen(_iconColor, 2))
                 {
                     graphics.SmoothingMode = AntiAlias;
-                    path.AddLine(rectIcon.X, rectIcon.Y, rectIcon.X + iconWidth / 2, rectIcon.Bottom);
-                    path.AddLine(rectIcon.X + iconWidth / 2, rectIcon.Bottom, rectIcon.Right, rectIcon.Y);
+                    path.AddLine(rectIc.X, rectIc.Y, rectIc.X + wIc / 2, rectIc.Bottom);
+                    path.AddLine(rectIc.X + wIc / 2, rectIc.Bottom, rectIc.Right, rectIc.Y);
                     graphics.DrawPath(pen, path);
                 }
             }

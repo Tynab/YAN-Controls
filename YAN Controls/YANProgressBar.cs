@@ -151,13 +151,13 @@ namespace YAN_Controls
         public override Color ForeColor { get => base.ForeColor; set => base.ForeColor = value; }
 
         //paint background & channel
-        protected override void OnPaintBackground(PaintEventArgs pevent)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
             if (!_stopPainting)
             {
                 if (!_paintedBlack)
                 {
-                    var graphics = pevent.Graphics;
+                    var graphics = e.Graphics;
                     var rectChannel = new Rectangle(0, 0, Width, ChannelHeight);
                     using (var brushChannel = new SolidBrush(_channelColor))
                     {
@@ -187,20 +187,20 @@ namespace YAN_Controls
             if (!_stopPainting)
             {
                 var graphics = e.Graphics;
-                var sliderWidth = (int)(Width * ((double)Value - Minimum) / ((double)Maximum - Minimum));
-                var rectSlider = new Rectangle(0, 0, sliderWidth, SliderHeight);
+                var wSlider = (int)(Width * ((double)Value - Minimum) / ((double)Maximum - Minimum));
+                var rectSlider = new Rectangle(0, 0, wSlider, SliderHeight);
                 using (var brushSlider = new SolidBrush(_sliderColor))
                 {
                     rectSlider.Y = _sliderHeight >= _channelHeight ? Height - _sliderHeight : Height - (_sliderHeight + _channelHeight) / 2;
                     //painting slider
-                    if (sliderWidth > 1)
+                    if (wSlider > 1)
                     {
                         graphics.FillRectangle(brushSlider, rectSlider);
                     }
                     //painting text
                     if (_textAlign != None)
                     {
-                        DrawValueText(graphics, sliderWidth, rectSlider);
+                        DrawValueText(graphics, wSlider, rectSlider);
                     }
                 }
             }
@@ -208,59 +208,59 @@ namespace YAN_Controls
         }
 
         //paint value text
-        private void DrawValueText(Graphics graphics, int sliderWidth, Rectangle rectSlider)
+        private void DrawValueText(Graphics graphics, int wSlider, Rectangle rectSlider)
         {
-            var text = $"{_symbolBefore}{Value}{_symbolAfter}";
+            var txt = $"{_symbolBefore}{Value}{_symbolAfter}";
             if (_showMaximum)
             {
-                text += $"/{_symbolBefore}{Maximum}{_symbolAfter}";
+                txt += $"/{_symbolBefore}{Maximum}{_symbolAfter}";
             }
-            var textSize = MeasureText(text, Font);
-            var rectText = new Rectangle(0, 0, textSize.Width, textSize.Height + 2);
-            using (var brushText = new SolidBrush(ForeColor))
+            var txtSize = MeasureText(txt, Font);
+            var rectTxt = new Rectangle(0, 0, txtSize.Width, txtSize.Height + 2);
+            using (var brushTxt = new SolidBrush(ForeColor))
             {
-                using (var brushTextBack = new SolidBrush(_valueBackColor))
+                using (var brushTxtBack = new SolidBrush(_valueBackColor))
                 {
-                    using (var textFormat = new StringFormat())
+                    using (var txtFormat = new StringFormat())
                     {
                         switch (_textAlign)
                         {
                             case TextPosition.Left:
                             {
-                                rectText.X = 0;
-                                textFormat.Alignment = Near;
+                                rectTxt.X = 0;
+                                txtFormat.Alignment = Near;
                                 break;
                             }
                             case TextPosition.Right:
                             {
-                                rectText.X = Width - textSize.Width;
-                                textFormat.Alignment = Far;
+                                rectTxt.X = Width - txtSize.Width;
+                                txtFormat.Alignment = Far;
                                 break;
                             }
                             case TextPosition.Center:
                             {
-                                rectText.X = (Width - textSize.Width) / 2;
-                                textFormat.Alignment = StringAlignment.Center;
+                                rectTxt.X = (Width - txtSize.Width) / 2;
+                                txtFormat.Alignment = StringAlignment.Center;
                                 break;
                             }
                             case Sliding:
                             {
-                                rectText.X = sliderWidth - textSize.Width;
-                                textFormat.Alignment = StringAlignment.Center;
+                                rectTxt.X = wSlider - txtSize.Width;
+                                txtFormat.Alignment = StringAlignment.Center;
                                 //clean previous surface
                                 using (var brushClear = new SolidBrush(Parent.BackColor))
                                 {
                                     var rect = rectSlider;
-                                    rect.Y = rectText.Y;
-                                    rect.Height = rectText.Height;
+                                    rect.Y = rectTxt.Y;
+                                    rect.Height = rectTxt.Height;
                                     graphics.FillRectangle(brushClear, rect);
                                 }
                                 break;
                             }
                         }
                         //painting
-                        graphics.FillRectangle(brushTextBack, rectText);
-                        graphics.DrawString(text, Font, brushText, rectText, textFormat);
+                        graphics.FillRectangle(brushTxtBack, rectTxt);
+                        graphics.DrawString(txt, Font, brushTxt, rectTxt, txtFormat);
                     }
                 }
             }

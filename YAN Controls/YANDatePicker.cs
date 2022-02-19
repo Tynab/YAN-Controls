@@ -88,16 +88,16 @@ namespace YAN_Controls
 
         #region Overridden
         //on drop down
-        protected override void OnDropDown(EventArgs eventargs)
+        protected override void OnDropDown(EventArgs e)
         {
-            base.OnDropDown(eventargs);
+            base.OnDropDown(e);
             _droppedDown = true;
         }
 
         //on close up
-        protected override void OnCloseUp(EventArgs eventargs)
+        protected override void OnCloseUp(EventArgs e)
         {
-            base.OnCloseUp(eventargs);
+            base.OnCloseUp(e);
             _droppedDown = false;
         }
 
@@ -117,23 +117,23 @@ namespace YAN_Controls
                 {
                     using (var skinBrush = new SolidBrush(_skinColor))
                     {
-                        using (var openIconBrush = new SolidBrush(FromArgb(50, 64, 64, 64)))
+                        using (var openIcBrush = new SolidBrush(FromArgb(50, 64, 64, 64)))
                         {
-                            using (var textBrush = new SolidBrush(_textColor))
+                            using (var txtBrush = new SolidBrush(_textColor))
                             {
-                                using (var textFormat = new StringFormat())
+                                using (var txtFormat = new StringFormat())
                                 {
                                     penBorder.Alignment = Inset;
-                                    textFormat.LineAlignment = StringAlignment.Center;
+                                    txtFormat.LineAlignment = StringAlignment.Center;
                                     var clientArea = new RectangleF(0, 0, Width - 0.5f, Height - 0.5f);
                                     //draw surface
                                     graphics.FillRectangle(skinBrush, clientArea);
                                     //draw text
-                                    graphics.DrawString("   " + Text, Font, textBrush, clientArea, textFormat);
+                                    graphics.DrawString("   " + Text, Font, txtBrush, clientArea, txtFormat);
                                     //draw open calendar icon highlight
                                     if (_droppedDown)
                                     {
-                                        graphics.FillRectangle(openIconBrush, new RectangleF(clientArea.Width - _calendarIconWidth, 0, _calendarIconWidth, clientArea.Height));
+                                        graphics.FillRectangle(openIcBrush, new RectangleF(clientArea.Width - _calendarIconWidth, 0, _calendarIconWidth, clientArea.Height));
                                     }
                                     //draw border
                                     if (_borderSize >= 1)
@@ -154,8 +154,8 @@ namespace YAN_Controls
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            var iconWidth = GetIconButtonWidth();
-            _iconButtonArea = new RectangleF(Width - iconWidth, 0, iconWidth, Height);
+            var wIc = GetIconButtonWidth();
+            _iconButtonArea = new RectangleF(Width - wIc, 0, wIc, Height);
         }
 
         //on mouse move

@@ -127,9 +127,9 @@ namespace YAN_Controls
         }
 
         //on mouse move
-        protected override void OnMouseMove(MouseEventArgs mevent)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            base.OnMouseMove(mevent);
+            base.OnMouseMove(e);
             Cursor = Hand;
         }
         #endregion

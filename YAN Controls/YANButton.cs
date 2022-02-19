@@ -133,9 +133,9 @@ namespace YAN_Controls
         }
 
         //on mouse move
-        protected override void OnMouseMove(MouseEventArgs mevent)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            base.OnMouseMove(mevent);
+            base.OnMouseMove(e);
             Cursor = Hand;
         }
         #endregion
@@ -155,15 +155,15 @@ namespace YAN_Controls
 
         #region Methods
         //get path of figure
-        private GraphicsPath GetFigurePath(RectangleF rectangleF, float radius)
+        private GraphicsPath GetFigurePath(RectangleF rectF, float rad)
         {
             var path = new GraphicsPath();
-            var curveSize = radius * 2f;
+            var curveSize = rad * 2f;
             path.StartFigure();
-            path.AddArc(rectangleF.X, rectangleF.Y, curveSize, curveSize, 180, 90);
-            path.AddArc(rectangleF.Right - curveSize, rectangleF.Y, curveSize, curveSize, 270, 90);
-            path.AddArc(rectangleF.Right - curveSize, rectangleF.Bottom - curveSize, curveSize, curveSize, 0, 90);
-            path.AddArc(rectangleF.X, rectangleF.Bottom - curveSize, curveSize, curveSize, 90, 90);
+            path.AddArc(rectF.X, rectF.Y, curveSize, curveSize, 180, 90);
+            path.AddArc(rectF.Right - curveSize, rectF.Y, curveSize, curveSize, 270, 90);
+            path.AddArc(rectF.Right - curveSize, rectF.Bottom - curveSize, curveSize, curveSize, 0, 90);
+            path.AddArc(rectF.X, rectF.Bottom - curveSize, curveSize, curveSize, 90, 90);
             path.CloseFigure();
             return path;
         }

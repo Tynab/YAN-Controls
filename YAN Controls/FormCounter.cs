@@ -49,7 +49,7 @@ namespace YAN_Controls
 
         #region Events
         //load
-        private void FormCounter_Load(object sender, EventArgs e) => AnimateWindow(Handle, 500, AW_BLEND);
+        private void FormCounter_Load(object sender, EventArgs e) => AnimateWindow(Handle, 300, AW_BLEND);
         #endregion
 
         #region Event Tokens
@@ -57,7 +57,7 @@ namespace YAN_Controls
         public void CloseToken()
         {
             DialogResult = OK;
-            AnimateWindow(Handle, 500, AW_BLEND | AW_HIDE);
+            AnimateWindow(Handle, 300, AW_BLEND | AW_HIDE);
             Dispose();
         }
         #endregion

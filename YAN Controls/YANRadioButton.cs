@@ -55,9 +55,9 @@ namespace YAN_Controls
 
         #region Overridden
         //on paint
-        protected override void OnPaint(PaintEventArgs pevent)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            var graphics = pevent.Graphics;
+            var graphics = e.Graphics;
             graphics.SmoothingMode = AntiAlias;
             var rbBorderSize = 18f;
             var rbCheckSize = 12f;
@@ -80,7 +80,7 @@ namespace YAN_Controls
             {
                 using (var brushRbCheck = new SolidBrush(_checkedColor))
                 {
-                    using (var brushText = new SolidBrush(ForeColor))
+                    using (var brushTxt = new SolidBrush(ForeColor))
                     {
                         //draw surface
                         graphics.Clear(BackColor);
@@ -96,31 +96,31 @@ namespace YAN_Controls
                             graphics.DrawEllipse(penBorder, rectRbBorder);
                         }
                         //draw text
-                        graphics.DrawString(Text, Font, brushText, rbBorderSize + 8, (Height - MeasureText(Text, Font).Height) / 2);
+                        graphics.DrawString(Text, Font, brushTxt, rbBorderSize + 8, (Height - MeasureText(Text, Font).Height) / 2);
                     }
                 }
             }
         }
 
         //on mouse move
-        protected override void OnMouseMove(MouseEventArgs mevent)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            base.OnMouseMove(mevent);
+            base.OnMouseMove(e);
             Cursor = Hand;
         }
 
         //on mouse enter
-        protected override void OnMouseEnter(EventArgs eventargs)
+        protected override void OnMouseEnter(EventArgs e)
         {
-            base.OnMouseEnter(eventargs);
+            base.OnMouseEnter(e);
             _foreColorTemp = ForeColor;
             ForeColor = _highlightText;
         }
 
         //on mouse leave
-        protected override void OnMouseLeave(EventArgs eventargs)
+        protected override void OnMouseLeave(EventArgs e)
         {
-            base.OnMouseLeave(eventargs);
+            base.OnMouseLeave(e);
             ForeColor = _foreColorTemp;
         }
         #endregion

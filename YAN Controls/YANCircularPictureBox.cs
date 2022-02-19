@@ -155,14 +155,14 @@ namespace YAN_Controls
         }
 
         // on paint
-        protected override void OnPaint(PaintEventArgs pe)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            var graphics = pe.Graphics;
+            var graphics = e.Graphics;
             using (var brush = new LinearGradientBrush(ClientRectangle, _topColor, _bottomColor, _angle))
             {
                 graphics.FillRectangle(brush, ClientRectangle);
             }
-            base.OnPaint(pe);
+            base.OnPaint(e);
             var rectContourSmooth = Inflate(ClientRectangle, -1, -1);
             var rectBorder = Inflate(rectContourSmooth, -_borderSize, -_borderSize);
             using (var borderGColor = new LinearGradientBrush(rectBorder, _borderTopColor, _borderBottomColor, _borderAngle))

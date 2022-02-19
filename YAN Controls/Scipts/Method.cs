@@ -61,15 +61,15 @@ namespace YAN_Controls.Scipts
         /// <summary>
         /// Mod form round ellipse.
         /// </summary>
-        /// <param name="nLeftRect">Left path.</param>
-        /// <param name="nTopRect">Top path.</param>
-        /// <param name="nRightRect">Right path.</param>
-        /// <param name="nBottomRect">Bot path.</param>
-        /// <param name="nWidthEllipse">Width path.</param>
-        /// <param name="nHeightElippse">Height path.</param>
+        /// <param name="nLRect">Left path.</param>
+        /// <param name="nTRect">Top path.</param>
+        /// <param name="nRRect">Right path.</param>
+        /// <param name="nBRect">Bot path.</param>
+        /// <param name="nWEllipse">Width path.</param>
+        /// <param name="nHElippse">Height path.</param>
         /// <returns>Platform specific.</returns>
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        internal static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightElippse);
+        internal static extern IntPtr CreateRoundRectRgn(int nLRect, int nTRect, int nRRect, int nBRect, int nWEllipse, int nHElippse);
         #endregion
     }
 }

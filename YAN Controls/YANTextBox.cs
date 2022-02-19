@@ -213,68 +213,66 @@ namespace YAN_Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            using (var graphics = e.Graphics)
+            var graphics = e.Graphics;
+            if (_borderRadius > 1)
             {
-                if (_borderRadius > 1)
+                var rectBorderSmooth = ClientRectangle;
+                using (var pathBorderSmooth = GetFigurePath(rectBorderSmooth, _borderRadius))
                 {
-                    var rectBorderSmooth = ClientRectangle;
-                    using (var pathBorderSmooth = GetFigurePath(rectBorderSmooth, _borderRadius))
+                    using (var pathBorder = GetFigurePath(Inflate(rectBorderSmooth, -_borderSize, -_borderSize), _borderRadius - _borderSize))
                     {
-                        using (var pathBorder = GetFigurePath(Inflate(rectBorderSmooth, -_borderSize, -_borderSize), _borderRadius - _borderSize))
+                        using (var penBorderSmooth = new Pen(Parent.BackColor, _borderSize > 0 ? _borderSize : 1))
                         {
-                            using (var penBorderSmooth = new Pen(Parent.BackColor, _borderSize > 0 ? _borderSize : 1))
+                            using (var penBorder = new Pen(_borderColor, _borderSize))
                             {
-                                using (var penBorder = new Pen(_borderColor, _borderSize))
+                                Region = new Region(pathBorderSmooth);
+                                if (_borderRadius > 15)
                                 {
-                                    Region = new Region(pathBorderSmooth);
-                                    if (_borderRadius > 15)
-                                    {
-                                        SetTextBoxRoundedRegion();
-                                    }
-                                    graphics.SmoothingMode = AntiAlias;
-                                    penBorder.Alignment = Center;
-                                    if (_isFocus)
-                                    {
-                                        penBorder.Color = _borderFocusColor;
-                                    }
-                                    if (_underlinedStyle)
-                                    {
-                                        //draw border smoothing
-                                        graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
-                                        //draw border
-                                        graphics.SmoothingMode = None;
-                                        graphics.DrawLine(penBorder, 0, Height - 1, Width, Height - 1);
-                                    }
-                                    else
-                                    {
-                                        //draw border smoothing
-                                        graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
-                                        //draw border
-                                        graphics.DrawPath(penBorder, pathBorder);
-                                    }
+                                    SetTextBoxRoundedRegion();
+                                }
+                                graphics.SmoothingMode = AntiAlias;
+                                penBorder.Alignment = Center;
+                                if (_isFocus)
+                                {
+                                    penBorder.Color = _borderFocusColor;
+                                }
+                                if (_underlinedStyle)
+                                {
+                                    //draw border smoothing
+                                    graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
+                                    //draw border
+                                    graphics.SmoothingMode = None;
+                                    graphics.DrawLine(penBorder, 0, Height - 1, Width, Height - 1);
+                                }
+                                else
+                                {
+                                    //draw border smoothing
+                                    graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
+                                    //draw border
+                                    graphics.DrawPath(penBorder, pathBorder);
                                 }
                             }
                         }
                     }
                 }
-                else
+            }
+            else
+            {
+                using (var penBorder = new Pen(_borderColor, _borderSize))
                 {
-                    using (var penBorder = new Pen(_borderColor, _borderSize))
+                    Region = new Region(ClientRectangle);
+                    penBorder.Alignment = Inset;
+                    if (_isFocus)
                     {
-                        Region = new Region(ClientRectangle);
-                        penBorder.Alignment = Inset;
-                        if (_isFocus)
-                        {
-                            penBorder.Color = _borderFocusColor;
-                        }
-                        if (_underlinedStyle)
-                        {
-                            graphics.DrawLine(penBorder, 0, Height - 1, Width, Height - 1);
-                        }
-                        else
-                        {
-                            graphics.DrawRectangle(penBorder, 0, 0, Width - 0.5f, Height - 0.5f);
-                        }
+                        penBorder.Color = _borderFocusColor;
+                    }
+                    if (_underlinedStyle)
+                    {
+                        graphics.DrawLine(penBorder, 0, Height - 1, Width, Height - 1);
+                    }
+                    else
+                    {
+                        graphics.DrawRectangle(penBorder, 0, 0, Width - 0.5f, Height - 0.5f);
                     }
                 }
             }
