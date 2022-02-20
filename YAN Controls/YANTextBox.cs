@@ -32,7 +32,7 @@ namespace YAN_Controls
         public YANTextBox()
         {
             InitializeComponent();
-            Resize += Control_Resize;
+            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -204,7 +204,7 @@ namespace YAN_Controls
                 textBoxMain.Font = value;
                 if (DesignMode)
                 {
-                    UpdateControlHeight();
+                    UpdateHCtrl();
                 }
             }
         }
@@ -228,7 +228,7 @@ namespace YAN_Controls
                                 Region = new Region(pathBorderSmooth);
                                 if (_borderRadius > 15)
                                 {
-                                    SetTextBoxRoundedRegion();
+                                    SetTxtRoundedRegion();
                                 }
                                 graphics.SmoothingMode = AntiAlias;
                                 penBorder.Alignment = Center;
@@ -284,7 +284,7 @@ namespace YAN_Controls
             base.OnResize(e);
             if (DesignMode)
             {
-                UpdateControlHeight();
+                UpdateHCtrl();
             }
         }
 
@@ -292,7 +292,7 @@ namespace YAN_Controls
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            UpdateControlHeight();
+            UpdateHCtrl();
         }
         #endregion
 
@@ -347,7 +347,7 @@ namespace YAN_Controls
 
         #region Event Tokens
         //check border size and radius when resize the control
-        private void Control_Resize(object sender, EventArgs e)
+        private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
             Miner(ref _borderRadius, minSize / 2);
@@ -394,14 +394,14 @@ namespace YAN_Controls
         }
 
         //set rounded region to the control
-        private void SetTextBoxRoundedRegion()
+        private void SetTxtRoundedRegion()
         {
             var client = textBoxMain.ClientRectangle;
             textBoxMain.Region = Multiline ? new Region(GetFigurePath(client, _borderRadius - _borderSize)) : new Region(GetFigurePath(client, _borderSize * 2));
         }
 
         //update the height of control when changed font display
-        private void UpdateControlHeight()
+        private void UpdateHCtrl()
         {
             if (!textBoxMain.Multiline)
             {

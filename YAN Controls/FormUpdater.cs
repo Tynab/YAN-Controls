@@ -20,7 +20,7 @@ namespace YAN_Controls
         }
         #endregion
 
-        #region Locks
+        #region Overridden
         //hide sub windows
         protected override CreateParams CreateParams
         {
@@ -43,7 +43,7 @@ namespace YAN_Controls
 
         #region Event Tokens
         //close
-        public void CloseToken()
+        public void FrmCloseToken()
         {
             DialogResult = OK;
             AnimateWindow(Handle, 500, AW_BLEND | AW_HIDE);

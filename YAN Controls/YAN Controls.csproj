@@ -150,6 +150,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUpdater.resx">
       <DependentUpon>FormUpdater.cs</DependentUpon>

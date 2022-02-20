@@ -30,7 +30,7 @@ namespace YAN_Controls
         private int _borderSize = 1;
         private readonly ComboBox _cmbList;
         private readonly Label _lblText;
-        private readonly Button _btnIcon;
+        private readonly Button _btnIc;
         #endregion
 
         #region Constructors
@@ -38,7 +38,7 @@ namespace YAN_Controls
         {
             _cmbList = new ComboBox();
             _lblText = new Label();
-            _btnIcon = new Button();
+            _btnIc = new Button();
             SuspendLayout();
             //combobox dropdown list
             _cmbList.BackColor = _listBackColor;
@@ -50,15 +50,15 @@ namespace YAN_Controls
             _cmbList.TextChanged += ComboBox_TxtChanged;
             _cmbList.KeyUp += Control_KeyUp;
             //button icon
-            _btnIcon.Dock = DockStyle.Right;
-            _btnIcon.FlatStyle = Flat;
-            _btnIcon.FlatAppearance.BorderSize = 0;
-            _btnIcon.BackColor = _backColor;
-            _btnIcon.Size = new Size(30, 30);
-            _btnIcon.Cursor = Hand;
-            _btnIcon.Click += Icon_Click;
-            _btnIcon.Paint += new PaintEventHandler(Icon_Paint);
-            _btnIcon.TabStop = false;
+            _btnIc.Dock = DockStyle.Right;
+            _btnIc.FlatStyle = Flat;
+            _btnIc.FlatAppearance.BorderSize = 0;
+            _btnIc.BackColor = _backColor;
+            _btnIc.Size = new Size(30, 30);
+            _btnIc.Cursor = Hand;
+            _btnIc.Click += Icon_Click;
+            _btnIc.Paint += new PaintEventHandler(Icon_Paint);
+            _btnIc.TabStop = false;
             //label text
             _lblText.Dock = Fill;
             _lblText.AutoSize = false;
@@ -71,7 +71,7 @@ namespace YAN_Controls
             _lblText.MouseLeave += Surface_MouseLeave;
             //user control
             Controls.Add(_lblText); //2
-            Controls.Add(_btnIcon); //1
+            Controls.Add(_btnIc); //1
             Controls.Add(_cmbList); //0
             MinimumSize = new Size(200, 30);
             Size = new Size(200, 30);
@@ -79,8 +79,8 @@ namespace YAN_Controls
             Padding = new Padding(_borderSize);
             base.BackColor = _borderColor;
             ResumeLayout();
-            AdjustComboBoxDimension();
-            Resize += Control_Resize;
+            AdjustCmbDimension();
+            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -104,7 +104,7 @@ namespace YAN_Controls
             {
                 _backColor = value;
                 _lblText.BackColor = _backColor;
-                _btnIcon.BackColor = _backColor;
+                _btnIc.BackColor = _backColor;
             }
         }
 
@@ -115,7 +115,7 @@ namespace YAN_Controls
             set
             {
                 _iconColor = value;
-                _btnIcon.Invalidate();
+                _btnIc.Invalidate();
             }
         }
 
@@ -162,7 +162,7 @@ namespace YAN_Controls
                 {
                     _borderSize = value;
                     Padding = new Padding(_borderSize);
-                    AdjustComboBoxDimension();
+                    AdjustCmbDimension();
                 }
             }
         }
@@ -272,7 +272,7 @@ namespace YAN_Controls
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            AdjustComboBoxDimension();
+            AdjustCmbDimension();
         }
 
         //on paint
@@ -331,7 +331,7 @@ namespace YAN_Controls
         {
             var wIc = 14;
             var hIc = 6;
-            var rectIc = new Rectangle((_btnIcon.Width - wIc) / 2, (_btnIcon.Height - hIc) / 2, wIc, hIc);
+            var rectIc = new Rectangle((_btnIc.Width - wIc) / 2, (_btnIc.Height - hIc) / 2, wIc, hIc);
             var graphics = e.Graphics;
             //draw arrow down icon
             using (var path = new GraphicsPath())
@@ -356,7 +356,7 @@ namespace YAN_Controls
 
         #region Event Tokens
         //check border size and radius when resize the control
-        private void Control_Resize(object sender, EventArgs e)
+        private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
             Miner(ref _borderSize, minSize / 2);
@@ -365,7 +365,7 @@ namespace YAN_Controls
 
         #region Methods
         //adjust combo box dimension
-        private void AdjustComboBoxDimension()
+        private void AdjustCmbDimension()
         {
             _cmbList.Width = _lblText.Width;
             _cmbList.Location = new Point()

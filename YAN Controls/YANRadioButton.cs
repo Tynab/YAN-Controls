@@ -80,7 +80,7 @@ namespace YAN_Controls
             {
                 using (var brushRbCheck = new SolidBrush(_checkedColor))
                 {
-                    using (var brushTxt = new SolidBrush(ForeColor))
+                    using (var brushText = new SolidBrush(ForeColor))
                     {
                         //draw surface
                         graphics.Clear(BackColor);
@@ -96,7 +96,7 @@ namespace YAN_Controls
                             graphics.DrawEllipse(penBorder, rectRbBorder);
                         }
                         //draw text
-                        graphics.DrawString(Text, Font, brushTxt, rbBorderSize + 8, (Height - MeasureText(Text, Font).Height) / 2);
+                        graphics.DrawString(Text, Font, brushText, rbBorderSize + 8, (Height - MeasureText(Text, Font).Height) / 2);
                     }
                 }
             }

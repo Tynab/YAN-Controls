@@ -19,10 +19,10 @@ namespace YAN_Controls
         private Color _textColor = White;
         private Color _borderColor = PaleVioletRed;
         private int _borderSize = 0;
-        private Image _calendarIcon = pCalendarWhite;
-        private RectangleF _iconButtonArea;
-        private const int _calendarIconWidth = 34;
-        private const int _arrowIconWidth = 17;
+        private Image _calIc = pCalendarWhite;
+        private RectangleF _icBtnArea;
+        private const int _wCalIc = 34;
+        private const int _wArrowIc = 17;
         private bool _droppedDown = false;
         #endregion
 
@@ -32,7 +32,7 @@ namespace YAN_Controls
             SetStyle(UserPaint, true);
             MinimumSize = new Size(0, 35);
             Font = new Font(Font.Name, 9.5f);
-            Resize += Control_Resize;
+            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -44,7 +44,7 @@ namespace YAN_Controls
             set
             {
                 _skinColor = value;
-                _calendarIcon = _skinColor.GetBrightness() >= 0.8f ? pCalendarBlack : pCalendarWhite;
+                _calIc = _skinColor.GetBrightness() >= 0.8f ? pCalendarBlack : pCalendarWhite;
                 Invalidate();
             }
         }
@@ -119,21 +119,21 @@ namespace YAN_Controls
                     {
                         using (var openIcBrush = new SolidBrush(FromArgb(50, 64, 64, 64)))
                         {
-                            using (var txtBrush = new SolidBrush(_textColor))
+                            using (var textBrush = new SolidBrush(_textColor))
                             {
-                                using (var txtFormat = new StringFormat())
+                                using (var textFormat = new StringFormat())
                                 {
                                     penBorder.Alignment = Inset;
-                                    txtFormat.LineAlignment = StringAlignment.Center;
+                                    textFormat.LineAlignment = StringAlignment.Center;
                                     var clientArea = new RectangleF(0, 0, Width - 0.5f, Height - 0.5f);
                                     //draw surface
                                     graphics.FillRectangle(skinBrush, clientArea);
                                     //draw text
-                                    graphics.DrawString("   " + Text, Font, txtBrush, clientArea, txtFormat);
+                                    graphics.DrawString("   " + Text, Font, textBrush, clientArea, textFormat);
                                     //draw open calendar icon highlight
                                     if (_droppedDown)
                                     {
-                                        graphics.FillRectangle(openIcBrush, new RectangleF(clientArea.Width - _calendarIconWidth, 0, _calendarIconWidth, clientArea.Height));
+                                        graphics.FillRectangle(openIcBrush, new RectangleF(clientArea.Width - _wCalIc, 0, _wCalIc, clientArea.Height));
                                     }
                                     //draw border
                                     if (_borderSize >= 1)
@@ -141,7 +141,7 @@ namespace YAN_Controls
                                         graphics.DrawRectangle(penBorder, clientArea.X, clientArea.Y, clientArea.Width, clientArea.Height);
                                     }
                                     //draw icon
-                                    graphics.DrawImage(_calendarIcon, Width - _calendarIcon.Width - 9, (Height - _calendarIcon.Height) / 2);
+                                    graphics.DrawImage(_calIc, Width - _calIc.Width - 9, (Height - _calIc.Height) / 2);
                                 }
                             }
                         }
@@ -154,21 +154,21 @@ namespace YAN_Controls
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            var wIc = GetIconButtonWidth();
-            _iconButtonArea = new RectangleF(Width - wIc, 0, wIc, Height);
+            var wIc = GetWIcBtn();
+            _icBtnArea = new RectangleF(Width - wIc, 0, wIc, Height);
         }
 
         //on mouse move
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            Cursor = _iconButtonArea.Contains(e.Location) ? Hand : DefaultCursor;
+            Cursor = _icBtnArea.Contains(e.Location) ? Hand : DefaultCursor;
         }
         #endregion
 
         #region Event Tokens
         //check border size and radius when resize the control
-        private void Control_Resize(object sender, EventArgs e)
+        private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
             Miner(ref _borderSize, minSize / 2);
@@ -177,7 +177,7 @@ namespace YAN_Controls
 
         #region Methods
         //get width of icon of button
-        private int GetIconButtonWidth() => MeasureText(Text, Font).Width <= Width - _calendarIconWidth - 20 ? _calendarIconWidth : _arrowIconWidth;
+        private int GetWIcBtn() => MeasureText(Text, Font).Width <= Width - _wCalIc - 20 ? _wCalIc : _wArrowIc;
         #endregion
     }
 }

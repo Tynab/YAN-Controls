@@ -13,25 +13,25 @@ namespace YAN_Controls
     public partial class FormCounter : Form
     {
         #region Constructors
-        public FormCounter(Form form, int corner, bool onTop)
+        public FormCounter(Form frm, int cor, bool onTop)
         {
             InitializeComponent();
             //form
             StartPosition = Manual;
-            Location = new Point(form.Location.X, form.Location.Y);
-            Width = form.Width;
-            Height = form.Height;
+            Location = new Point(frm.Location.X, frm.Location.Y);
+            Width = frm.Width;
+            Height = frm.Height;
             TopMost = onTop;
             //option
             pictureBoxWait.Top = (Height - pictureBoxWait.Height) / 2;
             labelPercent.Top = pictureBoxWait.Top + 300;
             labelPercent.Text = null;
             //setting
-            Region = FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, corner, corner));
+            Region = FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, cor, cor));
         }
         #endregion
 
-        #region Locks
+        #region Overridden
         //hide sub windows
         protected override CreateParams CreateParams
         {
@@ -54,7 +54,7 @@ namespace YAN_Controls
 
         #region Event Tokens
         //close
-        public void CloseToken()
+        public void FrmCloseToken()
         {
             DialogResult = OK;
             AnimateWindow(Handle, 300, AW_BLEND | AW_HIDE);

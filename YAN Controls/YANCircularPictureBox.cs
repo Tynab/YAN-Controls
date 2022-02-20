@@ -32,7 +32,7 @@ namespace YAN_Controls
         {
             Size = new Size(100, 100);
             SizeMode = StretchImage;
-            Resize += Control_Resize;
+            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -193,7 +193,7 @@ namespace YAN_Controls
 
         #region Event Tokens
         //check border size and radius when resize the control
-        private void Control_Resize(object sender, EventArgs e)
+        private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
             Miner(ref _borderSize, minSize / 2);

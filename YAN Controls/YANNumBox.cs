@@ -29,7 +29,7 @@ namespace YAN_Controls
         {
             InitializeComponent();
             Txt = Val.ToString();
-            Resize += Control_Resize;
+            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -209,7 +209,7 @@ namespace YAN_Controls
                 numericUpDownMain.Font = value;
                 if (DesignMode)
                 {
-                    UpdateControlHeight();
+                    UpdateHCtrl();
                 }
             }
         }
@@ -234,7 +234,7 @@ namespace YAN_Controls
                                 Region = new Region(pathBorderSmooth);
                                 if (_borderRadius > 15)
                                 {
-                                    SetTextBoxRoundedRegion();
+                                    SetTxtRoundedRegion();
                                 }
                                 graphics.SmoothingMode = AntiAlias;
                                 penBorder.Alignment = Center;
@@ -290,7 +290,7 @@ namespace YAN_Controls
             base.OnResize(e);
             if (DesignMode)
             {
-                UpdateControlHeight();
+                UpdateHCtrl();
             }
         }
 
@@ -298,7 +298,7 @@ namespace YAN_Controls
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            UpdateControlHeight();
+            UpdateHCtrl();
         }
         #endregion
 
@@ -346,7 +346,7 @@ namespace YAN_Controls
 
         #region Event Tokens
         //check border size and radius when resize the control
-        private void Control_Resize(object sender, EventArgs e)
+        private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
             Miner(ref _borderRadius, minSize / 2);
@@ -356,10 +356,10 @@ namespace YAN_Controls
 
         #region Methods
         //set rounded region to the control
-        private void SetTextBoxRoundedRegion() => numericUpDownMain.Region = new Region(GetFigurePath(numericUpDownMain.ClientRectangle, _borderSize * 2));
+        private void SetTxtRoundedRegion() => numericUpDownMain.Region = new Region(GetFigurePath(numericUpDownMain.ClientRectangle, _borderSize * 2));
 
         //update the height of control when changed font display
-        private void UpdateControlHeight()
+        private void UpdateHCtrl()
         {
             numericUpDownMain.MinimumSize = new Size(0, MeasureText("0", Font).Height + 1);
             Height = numericUpDownMain.Height + Padding.Top + Padding.Bottom;

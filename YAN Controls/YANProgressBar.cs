@@ -210,57 +210,57 @@ namespace YAN_Controls
         //paint value text
         private void DrawValueText(Graphics graphics, int wSlider, Rectangle rectSlider)
         {
-            var txt = $"{_symbolBefore}{Value}{_symbolAfter}";
+            var text = $"{_symbolBefore}{Value}{_symbolAfter}";
             if (_showMaximum)
             {
-                txt += $"/{_symbolBefore}{Maximum}{_symbolAfter}";
+                text += $"/{_symbolBefore}{Maximum}{_symbolAfter}";
             }
-            var txtSize = MeasureText(txt, Font);
-            var rectTxt = new Rectangle(0, 0, txtSize.Width, txtSize.Height + 2);
-            using (var brushTxt = new SolidBrush(ForeColor))
+            var textSize = MeasureText(text, Font);
+            var rectText = new Rectangle(0, 0, textSize.Width, textSize.Height + 2);
+            using (var brushText = new SolidBrush(ForeColor))
             {
-                using (var brushTxtBack = new SolidBrush(_valueBackColor))
+                using (var brushTextBack = new SolidBrush(_valueBackColor))
                 {
-                    using (var txtFormat = new StringFormat())
+                    using (var textFormat = new StringFormat())
                     {
                         switch (_textAlign)
                         {
                             case TextPosition.Left:
                             {
-                                rectTxt.X = 0;
-                                txtFormat.Alignment = Near;
+                                rectText.X = 0;
+                                textFormat.Alignment = Near;
                                 break;
                             }
                             case TextPosition.Right:
                             {
-                                rectTxt.X = Width - txtSize.Width;
-                                txtFormat.Alignment = Far;
+                                rectText.X = Width - textSize.Width;
+                                textFormat.Alignment = Far;
                                 break;
                             }
                             case TextPosition.Center:
                             {
-                                rectTxt.X = (Width - txtSize.Width) / 2;
-                                txtFormat.Alignment = StringAlignment.Center;
+                                rectText.X = (Width - textSize.Width) / 2;
+                                textFormat.Alignment = StringAlignment.Center;
                                 break;
                             }
                             case Sliding:
                             {
-                                rectTxt.X = wSlider - txtSize.Width;
-                                txtFormat.Alignment = StringAlignment.Center;
+                                rectText.X = wSlider - textSize.Width;
+                                textFormat.Alignment = StringAlignment.Center;
                                 //clean previous surface
                                 using (var brushClear = new SolidBrush(Parent.BackColor))
                                 {
                                     var rect = rectSlider;
-                                    rect.Y = rectTxt.Y;
-                                    rect.Height = rectTxt.Height;
+                                    rect.Y = rectText.Y;
+                                    rect.Height = rectText.Height;
                                     graphics.FillRectangle(brushClear, rect);
                                 }
                                 break;
                             }
                         }
                         //painting
-                        graphics.FillRectangle(brushTxtBack, rectTxt);
-                        graphics.DrawString(txt, Font, brushTxt, rectTxt, txtFormat);
+                        graphics.FillRectangle(brushTextBack, rectText);
+                        graphics.DrawString(text, Font, brushText, rectText, textFormat);
                     }
                 }
             }

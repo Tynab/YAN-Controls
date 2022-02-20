@@ -33,7 +33,7 @@ namespace YAN_Controls
             Size = new Size(150, 40);
             BackColor = MediumSlateBlue;
             ForeColor = White;
-            Resize += Control_Resize;
+            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -129,7 +129,7 @@ namespace YAN_Controls
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            Parent.BackColorChanged += Container_BackColorChanged;
+            Parent.BackColorChanged += Container_BackClChanged;
         }
 
         //on mouse move
@@ -142,10 +142,10 @@ namespace YAN_Controls
 
         #region Event Tokens
         //background color changed
-        private void Container_BackColorChanged(object sender, EventArgs e) => Invalidate();
+        private void Container_BackClChanged(object sender, EventArgs e) => Invalidate();
 
         //check border size and radius when resize the control
-        private void Control_Resize(object sender, EventArgs e)
+        private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
             Miner(ref _borderRadius, minSize / 2);
