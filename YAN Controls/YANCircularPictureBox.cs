@@ -191,7 +191,7 @@ namespace YAN_Controls
         }
         #endregion
 
-        #region Event Tokens
+        #region Event Handles
         //check border size and radius when resize the control
         private void Ctrl_Resize(object sender, EventArgs e)
         {

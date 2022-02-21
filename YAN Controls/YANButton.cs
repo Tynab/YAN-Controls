@@ -80,10 +80,10 @@ namespace YAN_Controls
 
         #region Overridden
         //on paint
-        protected override void OnPaint(PaintEventArgs pevent)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(pevent);
-            var graphics = pevent.Graphics;
+            base.OnPaint(e);
+            var graphics = e.Graphics;
             var rectSurface = ClientRectangle;
             if (_borderRadius > 2)
             {
@@ -129,7 +129,7 @@ namespace YAN_Controls
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            Parent.BackColorChanged += Container_BackClChanged;
+            Parent.BackColorChanged += Container_BackColorChanged;
         }
 
         //on mouse move
@@ -140,9 +140,9 @@ namespace YAN_Controls
         }
         #endregion
 
-        #region Event Tokens
+        #region Event Handles
         //background color changed
-        private void Container_BackClChanged(object sender, EventArgs e) => Invalidate();
+        private void Container_BackColorChanged(object sender, EventArgs e) => Invalidate();
 
         //check border size and radius when resize the control
         private void Ctrl_Resize(object sender, EventArgs e)

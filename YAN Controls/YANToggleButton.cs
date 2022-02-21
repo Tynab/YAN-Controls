@@ -95,7 +95,7 @@ namespace YAN_Controls
             var graphics = e.Graphics;
             graphics.SmoothingMode = AntiAlias;
             graphics.Clear(Parent.BackColor);
-            var toggleSize = Height - 5;
+            var tgSize = Height - 5;
             if (Checked)
             {
                 //draw the control surface
@@ -108,7 +108,7 @@ namespace YAN_Controls
                     graphics.DrawPath(new Pen(_onBackColor, 2), GetFigurePath());
                 }
                 //draw the toggle
-                graphics.FillEllipse(new SolidBrush(_onToggleColor), new Rectangle(Width - Height + 1, 2, toggleSize, toggleSize));
+                graphics.FillEllipse(new SolidBrush(_onToggleColor), new Rectangle(Width - Height + 1, 2, tgSize, tgSize));
             }
             else
             {
@@ -122,7 +122,7 @@ namespace YAN_Controls
                     graphics.DrawPath(new Pen(_offBackColor, 2), GetFigurePath());
                 }
                 //draw the toggle
-                graphics.FillEllipse(new SolidBrush(_offToggleColor), new Rectangle(2, 2, toggleSize, toggleSize));
+                graphics.FillEllipse(new SolidBrush(_offToggleColor), new Rectangle(2, 2, tgSize, tgSize));
             }
         }
 
