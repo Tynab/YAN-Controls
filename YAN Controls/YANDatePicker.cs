@@ -21,8 +21,8 @@ namespace YAN_Controls
         private int _borderSize = 0;
         private Image _calIc = pCalendarWhite;
         private RectangleF _icBtnArea;
-        private const int _wCalIc = 34;
-        private const int _wArrowIc = 17;
+        private const byte _wCalIc = 34;
+        private const byte _wArrowIc = 17;
         private bool _droppedDown = false;
         #endregion
 
