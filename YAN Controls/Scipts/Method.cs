@@ -7,29 +7,39 @@ namespace YAN_Controls.Scipts
     {
         #region Common
         /// <summary>
-        /// Find min value.
+        /// Tìm giá trị nhỏ nhất.
         /// </summary>
-        /// <param name="val">Current value.</param>
-        /// <param name="lim">Check value.</param>
-        internal static void Miner(ref int val, int lim)
+        /// <param name="list">Chuỗi dữ liệu so sánh.</param>
+        /// <returns>Giá trị nhỏ nhất.</returns>
+        internal static T Miner<T>(params T[] list)
         {
-            if (val > lim)
+            dynamic res = list[0];
+            foreach (var item in list)
             {
-                val = lim;
+                if (item < res)
+                {
+                    res = item;
+                }
             }
+            return res;
         }
 
         /// <summary>
-        /// Find max value.
+        /// Tìm giá trị lớn nhất.
         /// </summary>
-        /// <param name="val">Current value.</param>
-        /// <param name="lim">Check value.</param>
-        internal static void Maxer(ref int val, int lim)
+        /// <param name="list">Chuỗi dữ liệu so sánh.</param>
+        /// <returns>Giá trị lớn nhất.</returns>
+        internal static T Maxer<T>(params T[] list)
         {
-            if (val < lim)
+            dynamic res = list[0];
+            foreach (var item in list)
             {
-                val = lim;
+                if (item > res)
+                {
+                    res = item;
+                }
             }
+            return res;
         }
         #endregion
 
@@ -48,25 +58,25 @@ namespace YAN_Controls.Scipts
         }
 
         /// <summary>
-        /// Low animation sync.
+        /// Điều khiển object với animation đồng bộ.
         /// </summary>
-        /// <param name="hwand">Control.</param>
-        /// <param name="dwTime">Timer.</param>
-        /// <param name="dwFlags">Animation type.</param>
+        /// <param name="hwand">Object.</param>
+        /// <param name="dwTime">Thời gian tính bằng milisecond.</param>
+        /// <param name="dwFlags">Flag animate.</param>
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern void AnimateWindow(IntPtr hwand, int dwTime, AnimateWindowFlags dwFlags);
         #endregion
 
         #region Ellipse Form
         /// <summary>
-        /// Mod form round ellipse.
+        /// Tạo khung ellipse cho form.
         /// </summary>
-        /// <param name="nLRect">Left path.</param>
-        /// <param name="nTRect">Top path.</param>
-        /// <param name="nRRect">Right path.</param>
-        /// <param name="nBRect">Bot path.</param>
-        /// <param name="nWEllipse">Width path.</param>
-        /// <param name="nHElippse">Height path.</param>
+        /// <param name="nLRect">Tọa độ trái.</param>
+        /// <param name="nTRect">Tọa độ trên.</param>
+        /// <param name="nRRect">Tọa độ phải.</param>
+        /// <param name="nBRect">Tọa độ dưới.</param>
+        /// <param name="nWEllipse">Độ rộng.</param>
+        /// <param name="nHElippse">Độ cao.</param>
         /// <returns>Platform specific.</returns>
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         internal static extern IntPtr CreateRoundRectRgn(int nLRect, int nTRect, int nRRect, int nBRect, int nWEllipse, int nHElippse);

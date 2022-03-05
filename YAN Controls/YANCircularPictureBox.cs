@@ -196,7 +196,7 @@ namespace YAN_Controls
         private void Ctrl_Resize(object sender, EventArgs e)
         {
             var minSize = Width > Height ? Height : Width;
-            Miner(ref _borderSize, minSize / 2);
+            _borderSize = Miner(_borderSize, minSize / 2);
         }
         #endregion
     }

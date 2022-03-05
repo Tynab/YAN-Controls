@@ -21,7 +21,7 @@ namespace YAN_Controls
         #endregion
 
         #region Overridden
-        //hide sub windows
+        //ẩn sub window
         protected override CreateParams CreateParams
         {
             get
@@ -32,7 +32,7 @@ namespace YAN_Controls
             }
         }
 
-        //disable close
+        //tắt alt+f4
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) => keyData == (Alt | F4) || base.ProcessCmdKey(ref msg, keyData);
         #endregion
 
