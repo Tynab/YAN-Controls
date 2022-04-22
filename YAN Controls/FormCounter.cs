@@ -13,15 +13,17 @@ namespace YAN_Controls
     public partial class FormCounter : Form
     {
         #region Constructors
-        public FormCounter(Form frm, int cor, bool onTop)
+        public FormCounter(Form frm, int cor, bool is_Top)
         {
             InitializeComponent();
+            //this
+            Load += FormCounter_Load;
             //form
             StartPosition = Manual;
             Location = new Point(frm.Location.X, frm.Location.Y);
             Width = frm.Width;
             Height = frm.Height;
-            TopMost = onTop;
+            TopMost = is_Top;
             //option
             pictureBoxWait.Top = (Height - pictureBoxWait.Height) / 2;
             labelPercent.Top = pictureBoxWait.Top + 300;

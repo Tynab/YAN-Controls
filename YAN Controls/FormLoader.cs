@@ -13,15 +13,17 @@ namespace YAN_Controls
     public partial class FormLoader : Form
     {
         #region Constructors
-        public FormLoader(Form frm, int cor, bool onTop)
+        public FormLoader(Form frm, int cor, bool is_Top)
         {
             InitializeComponent();
+            //this
+            Load += FormLoader_Load;
             //form
             StartPosition = Manual;
             Location = new Point(frm.Location.X, frm.Location.Y);
             Width = frm.Width;
             Height = frm.Height;
-            TopMost = onTop;
+            TopMost = is_Top;
             //setting
             Region = FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, cor, cor));
         }

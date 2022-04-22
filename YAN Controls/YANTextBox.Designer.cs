@@ -41,14 +41,6 @@ namespace YAN_Controls
             this.textBoxMain.Size = new System.Drawing.Size(230, 15);
             this.textBoxMain.TabIndex = 0;
             this.textBoxMain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxMain.TextChanged += new System.EventHandler(this.TextBoxMain_TextChanged);
-            this.textBoxMain.Enter += new System.EventHandler(this.TextBoxMain_Enter);
-            this.textBoxMain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxMain_KeyDown);
-            this.textBoxMain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxMain_KeyPress);
-            this.textBoxMain.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxMain_KeyUp);
-            this.textBoxMain.Leave += new System.EventHandler(this.TextBoxMain_Leave);
-            this.textBoxMain.MouseEnter += new System.EventHandler(this.TextBoxMain_MouseEnter);
-            this.textBoxMain.MouseLeave += new System.EventHandler(this.TextBoxMain_MouseLeave);
             // 
             // YANTextBox
             // 

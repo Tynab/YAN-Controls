@@ -139,7 +139,6 @@
             this.Text = "Updating...";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.Load += new System.EventHandler(this.FormUpdater_Load);
             this.panelMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUpdating)).EndInit();
             this.ResumeLayout(false);

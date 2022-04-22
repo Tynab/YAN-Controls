@@ -13,6 +13,8 @@ namespace YAN_Controls
         public FormUpdater()
         {
             InitializeComponent();
+            //this
+            Load += FormUpdater_Load;
             //setting
             labelCapacity.Text = null;
             labelPercent.Text = null;

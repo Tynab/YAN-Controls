@@ -23,15 +23,23 @@ namespace YAN_Controls
         private int _borderSize = 2;
         private int _borderRadius = 0;
         private bool _underlinedStyle = false;
-        private bool _isFocus = false;
-        private bool _isPlaceholder = false;
-        private bool _isPasswordChar = false;
+        private bool _is_Focus = false;
+        private bool _is_Placeholder = false;
+        private bool _is_PasswordChar = false;
         #endregion
 
         #region Constructors
         public YANTextBox()
         {
             InitializeComponent();
+            textBoxMain.TextChanged += TextBoxMain_TextChanged;
+            textBoxMain.MouseEnter += TextBoxMain_MouseEnter;
+            textBoxMain.MouseLeave += TextBoxMain_MouseLeave;
+            textBoxMain.Enter += TextBoxMain_Enter;
+            textBoxMain.Leave += TextBoxMain_Leave;
+            textBoxMain.KeyDown += TextBoxMain_KeyDown;
+            textBoxMain.KeyPress += TextBoxMain_KeyPress;
+            textBoxMain.KeyUp += TextBoxMain_KeyUp;
             Resize += Ctrl_Resize;
         }
         #endregion
@@ -69,7 +77,7 @@ namespace YAN_Controls
             set
             {
                 _placeholderColor = value;
-                if (_isPlaceholder)
+                if (_is_Placeholder)
                 {
                     textBoxMain.ForeColor = value;
                 }
@@ -79,7 +87,7 @@ namespace YAN_Controls
         [Category("YAN Appearance"), Description("The text associated with the control.")]
         public string Txt
         {
-            get => _isPlaceholder ? null : textBoxMain.Text;
+            get => _is_Placeholder ? null : textBoxMain.Text;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
@@ -152,11 +160,11 @@ namespace YAN_Controls
         [Category("YAN Appearance"), Description("Indicates the character to display for password input for single-line edit controls.")]
         public bool PasswordChar
         {
-            get => _isPasswordChar;
+            get => _is_PasswordChar;
             set
             {
-                _isPasswordChar = value;
-                if (!_isPlaceholder)
+                _is_PasswordChar = value;
+                if (!_is_Placeholder)
                 {
                     textBoxMain.UseSystemPasswordChar = value;
                 }
@@ -232,7 +240,7 @@ namespace YAN_Controls
                                 }
                                 graphics.SmoothingMode = AntiAlias;
                                 penBorder.Alignment = Center;
-                                if (_isFocus)
+                                if (_is_Focus)
                                 {
                                     penBorder.Color = _borderFocusColor;
                                 }
@@ -262,7 +270,7 @@ namespace YAN_Controls
                 {
                     Region = new Region(ClientRectangle);
                     penBorder.Alignment = Inset;
-                    if (_isFocus)
+                    if (_is_Focus)
                     {
                         penBorder.Color = _borderFocusColor;
                     }
@@ -331,7 +339,7 @@ namespace YAN_Controls
         //raises the enter event
         private void TextBoxMain_Enter(object sender, EventArgs e)
         {
-            _isFocus = true;
+            _is_Focus = true;
             Invalidate();
             RemovePlaceholder();
         }
@@ -339,7 +347,7 @@ namespace YAN_Controls
         //raises the leave event
         private void TextBoxMain_Leave(object sender, EventArgs e)
         {
-            _isFocus = false;
+            _is_Focus = false;
             Invalidate();
             SetPlaceholder();
         }
@@ -361,10 +369,10 @@ namespace YAN_Controls
         {
             if (string.IsNullOrWhiteSpace(textBoxMain.Text) && !string.IsNullOrWhiteSpace(_placeholderText))
             {
-                _isPlaceholder = true;
+                _is_Placeholder = true;
                 textBoxMain.Text = _placeholderText;
                 textBoxMain.ForeColor = _placeholderColor;
-                if (_isPasswordChar)
+                if (_is_PasswordChar)
                 {
                     if (Created)
                     {
@@ -381,12 +389,12 @@ namespace YAN_Controls
         //remove placeholder text to the control
         private void RemovePlaceholder()
         {
-            if (_isPlaceholder && !string.IsNullOrWhiteSpace(_placeholderText))
+            if (_is_Placeholder && !string.IsNullOrWhiteSpace(_placeholderText))
             {
-                _isPlaceholder = false;
+                _is_Placeholder = false;
                 textBoxMain.Text = null;
                 textBoxMain.ForeColor = ForeColor;
-                if (_isPasswordChar)
+                if (_is_PasswordChar)
                 {
                     textBoxMain.UseSystemPasswordChar = true;
                 }

@@ -13,15 +13,17 @@ namespace YAN_Controls
     public partial class FormWaiter : Form
     {
         #region Constructors
-        public FormWaiter(Form frm, int cor, bool onTop)
+        public FormWaiter(Form frm, int cor, bool is_Top)
         {
             InitializeComponent();
+            //this
+            Load += FormWaiter_Load;
             //form
             StartPosition = Manual;
             Location = new Point(frm.Location.X, frm.Location.Y);
             Width = frm.Width;
             Height = frm.Height;
-            TopMost = onTop;
+            TopMost = is_Top;
             //option
             pictureBoxWait.Top = (Height - pictureBoxWait.Height) / 2;
             //setting
