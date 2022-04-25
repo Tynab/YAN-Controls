@@ -21,9 +21,9 @@ namespace YAN_Controls
         private string _symbolAfter = null;
         private int _channelHeight = 6;
         private int _sliderHeight = 6;
-        private bool _showMaximum = false;
-        private bool _paintedBlack = false;
-        private bool _stopPainting = false;
+        private bool _is_ShowMaximum = false;
+        private bool _is_PaintedBlack = false;
+        private bool _is_StopPainting = false;
         #endregion
 
         #region Constructors
@@ -132,10 +132,10 @@ namespace YAN_Controls
         [Category("YAN Appearance"), Description("When this property is true, the maximum value added to after value.")]
         public bool ShowMaximum
         {
-            get => _showMaximum;
+            get => _is_ShowMaximum;
             set
             {
-                _showMaximum = value;
+                _is_ShowMaximum = value;
                 Invalidate();
             }
         }
@@ -153,9 +153,9 @@ namespace YAN_Controls
         //paint background & channel
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            if (!_stopPainting)
+            if (!_is_StopPainting)
             {
-                if (!_paintedBlack)
+                if (!_is_PaintedBlack)
                 {
                     var graphics = e.Graphics;
                     var rectChannel = new Rectangle(0, 0, Width, ChannelHeight);
@@ -169,14 +169,14 @@ namespace YAN_Controls
                         //painting stop painting
                         if (!DesignMode)
                         {
-                            _paintedBlack = true;
+                            _is_PaintedBlack = true;
                         }
                     }
                 }
                 //reset painting
                 if (Value == Maximum || Value == Minimum)
                 {
-                    _paintedBlack = false;
+                    _is_PaintedBlack = false;
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace YAN_Controls
         //paint slider
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (!_stopPainting)
+            if (!_is_StopPainting)
             {
                 var graphics = e.Graphics;
                 var wSlider = (int)(Width * ((double)Value - Minimum) / ((double)Maximum - Minimum));
@@ -204,14 +204,14 @@ namespace YAN_Controls
                     }
                 }
             }
-            _stopPainting = Value == Maximum;
+            _is_StopPainting = Value == Maximum;
         }
 
         //paint value text
         private void DrawValueText(Graphics graphics, int wSlider, Rectangle rectSlider)
         {
             var text = $"{_symbolBefore}{Value}{_symbolAfter}";
-            if (_showMaximum)
+            if (_is_ShowMaximum)
             {
                 text += $"/{_symbolBefore}{Maximum}{_symbolAfter}";
             }

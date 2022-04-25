@@ -143,6 +143,7 @@
     </Compile>
     <EmbeddedResource Include="FormCounter.resx">
       <DependentUpon>FormCounter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLoader.resx">
       <DependentUpon>FormLoader.cs</DependentUpon>

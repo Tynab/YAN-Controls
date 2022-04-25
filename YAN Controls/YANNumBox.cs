@@ -20,16 +20,24 @@ namespace YAN_Controls
         private Color _borderFocusColor = HotPink;
         private int _borderSize = 2;
         private int _borderRadius = 0;
-        private bool _underlinedStyle = false;
-        private bool _isFocus = false;
+        private bool _is_UnderlinedStyle = false;
+        private bool _is_Focus = false;
         #endregion
 
         #region Constructors
         public YANNumBox()
         {
             InitializeComponent();
-            Txt = Val.ToString();
+            //this
             Resize += Ctrl_Resize;
+            //nb
+            numericUpDownMain.Enter += NumericUpDownMain_Enter;
+            numericUpDownMain.Leave += NumericUpDownMain_Leave;
+            numericUpDownMain.KeyDown += NumericUpDownMain_KeyDown;
+            numericUpDownMain.KeyPress += NumericUpDownMain_KeyPress;
+            numericUpDownMain.ValueChanged += NumericUpDownMain_ValueChanged;
+            //op
+            Txt = Val.ToString();
         }
         #endregion
 
@@ -152,10 +160,10 @@ namespace YAN_Controls
         [Category("YAN Appearance"), Description("When this property is true, the underline added to text.")]
         public bool UnderlinedStyle
         {
-            get => _underlinedStyle;
+            get => _is_UnderlinedStyle;
             set
             {
-                _underlinedStyle = value;
+                _is_UnderlinedStyle = value;
                 Invalidate();
             }
         }
@@ -238,11 +246,11 @@ namespace YAN_Controls
                                 }
                                 graphics.SmoothingMode = AntiAlias;
                                 penBorder.Alignment = Center;
-                                if (_isFocus)
+                                if (_is_Focus)
                                 {
                                     penBorder.Color = _borderFocusColor;
                                 }
-                                if (_underlinedStyle)
+                                if (_is_UnderlinedStyle)
                                 {
                                     //draw border smoothing
                                     graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
@@ -268,11 +276,11 @@ namespace YAN_Controls
                 {
                     Region = new Region(ClientRectangle);
                     penBorder.Alignment = Inset;
-                    if (_isFocus)
+                    if (_is_Focus)
                     {
                         penBorder.Color = _borderFocusColor;
                     }
-                    if (_underlinedStyle)
+                    if (_is_UnderlinedStyle)
                     {
                         graphics.DrawLine(penBorder, 0, Height - 1, Width, Height - 1);
                     }
@@ -302,18 +310,24 @@ namespace YAN_Controls
         }
         #endregion
 
-        #region Events
-        //raises the value changed event
-        private void NumericUpDownMain_ValueChanged(object sender, EventArgs e)
+        #region Events    
+        //raises the enter event
+        private void NumericUpDownMain_Enter(object sender, EventArgs e)
         {
-            if (ValChanged != null)
-            {
-                ValChanged.Invoke(sender, e);
-            }
+            _is_Focus = true;
+            Invalidate();
         }
 
-        //raises the key press event
-        private void NumericUpDownMain_KeyPress(object sender, KeyPressEventArgs e) => OnKeyPress(e);
+        //raises the leave event
+        private void NumericUpDownMain_Leave(object sender, EventArgs e)
+        {
+            _is_Focus = false;
+            if (string.IsNullOrWhiteSpace(numericUpDownMain.Text))
+            {
+                numericUpDownMain.Text = numericUpDownMain.Value.ToString();
+            }
+            Invalidate();
+        }
 
         //raises the key down event
         private void NumericUpDownMain_KeyDown(object sender, KeyEventArgs e)
@@ -325,22 +339,16 @@ namespace YAN_Controls
             }
         }
 
-        //raises the enter event
-        private void NumericUpDownMain_Enter(object sender, EventArgs e)
-        {
-            _isFocus = true;
-            Invalidate();
-        }
+        //raises the key press event
+        private void NumericUpDownMain_KeyPress(object sender, KeyPressEventArgs e) => OnKeyPress(e);
 
-        //raises the leave event
-        private void NumericUpDownMain_Leave(object sender, EventArgs e)
+        //raises the value changed event
+        private void NumericUpDownMain_ValueChanged(object sender, EventArgs e)
         {
-            _isFocus = false;
-            if (string.IsNullOrWhiteSpace(numericUpDownMain.Text))
+            if (ValChanged != null)
             {
-                numericUpDownMain.Text = numericUpDownMain.Value.ToString();
+                ValChanged.Invoke(sender, e);
             }
-            Invalidate();
         }
         #endregion
 

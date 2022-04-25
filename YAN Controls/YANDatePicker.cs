@@ -23,16 +23,18 @@ namespace YAN_Controls
         private RectangleF _icBtnArea;
         private const byte _wCalIc = 34;
         private const byte _wArrowIc = 17;
-        private bool _droppedDown = false;
+        private bool _is_DroppedDown = false;
         #endregion
 
         #region Constructors
         public YANDatePicker()
         {
+            //this
+            Resize += Ctrl_Resize;
+            //op
             SetStyle(UserPaint, true);
             MinimumSize = new Size(0, 35);
             Font = new Font(Font.Name, 9.5f);
-            Resize += Ctrl_Resize;
         }
         #endregion
 
@@ -91,14 +93,14 @@ namespace YAN_Controls
         protected override void OnDropDown(EventArgs e)
         {
             base.OnDropDown(e);
-            _droppedDown = true;
+            _is_DroppedDown = true;
         }
 
         //on close up
         protected override void OnCloseUp(EventArgs e)
         {
             base.OnCloseUp(e);
-            _droppedDown = false;
+            _is_DroppedDown = false;
         }
 
         //on key press
@@ -131,7 +133,7 @@ namespace YAN_Controls
                                     //draw text
                                     graphics.DrawString("   " + Text, Font, textBrush, clientArea, textFormat);
                                     //draw open calendar icon highlight
-                                    if (_droppedDown)
+                                    if (_is_DroppedDown)
                                     {
                                         graphics.FillRectangle(openIcBrush, new RectangleF(clientArea.Width - _wCalIc, 0, _wCalIc, clientArea.Height));
                                     }

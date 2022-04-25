@@ -18,17 +18,15 @@ namespace YAN_Controls
             InitializeComponent();
             //this
             Load += FormCounter_Load;
-            //form
+            //op
             StartPosition = Manual;
             Location = new Point(frm.Location.X, frm.Location.Y);
             Width = frm.Width;
             Height = frm.Height;
             TopMost = is_Top;
-            //option
             pictureBoxWait.Top = (Height - pictureBoxWait.Height) / 2;
             labelPercent.Top = pictureBoxWait.Top + 300;
             labelPercent.Text = null;
-            //setting
             Region = FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, cor, cor));
         }
         #endregion

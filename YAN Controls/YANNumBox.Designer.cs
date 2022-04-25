@@ -42,16 +42,10 @@ namespace YAN_Controls
             this.numericUpDownMain.Size = new System.Drawing.Size(230, 18);
             this.numericUpDownMain.TabIndex = 0;
             this.numericUpDownMain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDownMain.ValueChanged += new System.EventHandler(this.NumericUpDownMain_ValueChanged);
-            this.numericUpDownMain.Enter += new System.EventHandler(this.NumericUpDownMain_Enter);
-            this.numericUpDownMain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NumericUpDownMain_KeyDown);
-            this.numericUpDownMain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericUpDownMain_KeyPress);
-            this.numericUpDownMain.Leave += new System.EventHandler(this.NumericUpDownMain_Leave);
             // 
             // YANNumBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.numericUpDownMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

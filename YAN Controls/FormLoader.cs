@@ -18,13 +18,12 @@ namespace YAN_Controls
             InitializeComponent();
             //this
             Load += FormLoader_Load;
-            //form
+            //op
             StartPosition = Manual;
             Location = new Point(frm.Location.X, frm.Location.Y);
             Width = frm.Width;
             Height = frm.Height;
             TopMost = is_Top;
-            //setting
             Region = FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, cor, cor));
         }
         #endregion

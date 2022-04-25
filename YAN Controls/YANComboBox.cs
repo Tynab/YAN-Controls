@@ -41,38 +41,39 @@ namespace YAN_Controls
             _btnIc = new Button();
             SuspendLayout();
             //combobox dropdown list
+            _cmbList.KeyUp += Control_KeyUp;
+            _cmbList.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            _cmbList.TextChanged += ComboBox_TextChanged;
+            _cmbList.TextChanged += ComboBox_TxtChanged;
             _cmbList.BackColor = _listBackColor;
             _cmbList.Font = new Font(Font.Name, 10f);
             _cmbList.ForeColor = _listTextColor;
             _cmbList.IntegralHeight = false;
-            _cmbList.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
-            _cmbList.TextChanged += ComboBox_TextChanged;
-            _cmbList.TextChanged += ComboBox_TxtChanged;
-            _cmbList.KeyUp += Control_KeyUp;
             //button icon
+            _btnIc.Click += Icon_Click;
+            _btnIc.Paint += Icon_Paint;
             _btnIc.Dock = DockStyle.Right;
             _btnIc.FlatStyle = Flat;
             _btnIc.FlatAppearance.BorderSize = 0;
             _btnIc.BackColor = _backColor;
             _btnIc.Size = new Size(30, 30);
             _btnIc.Cursor = Hand;
-            _btnIc.Click += Icon_Click;
-            _btnIc.Paint += new PaintEventHandler(Icon_Paint);
             _btnIc.TabStop = false;
             //label text
+            _lblText.Click += Surface_Click;
+            _lblText.MouseEnter += Surface_MouseEnter;
+            _lblText.MouseLeave += Surface_MouseLeave;
             _lblText.Dock = Fill;
             _lblText.AutoSize = false;
             _lblText.BackColor = _backColor;
             _lblText.TextAlign = _textAlign;
             _lblText.Padding = new Padding(8, 0, 0, 0);
             _lblText.Font = new Font(Font.Name, 10f);
-            _lblText.Click += Surface_Click;
-            _lblText.MouseEnter += Surface_MouseEnter;
-            _lblText.MouseLeave += Surface_MouseLeave;
             //user control
             Controls.Add(_lblText); //2
             Controls.Add(_btnIc); //1
             Controls.Add(_cmbList); //0
+            Resize += Ctrl_Resize;
             MinimumSize = new Size(200, 30);
             Size = new Size(200, 30);
             ForeColor = DimGray;
@@ -80,7 +81,6 @@ namespace YAN_Controls
             base.BackColor = _borderColor;
             ResumeLayout();
             AdjustCmbDimension();
-            Resize += Ctrl_Resize;
         }
         #endregion
 

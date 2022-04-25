@@ -15,7 +15,7 @@ namespace YAN_Controls
             InitializeComponent();
             //this
             Load += FormUpdater_Load;
-            //setting
+            //op
             labelCapacity.Text = null;
             labelPercent.Text = null;
             panelProgressBar.Width = 1;

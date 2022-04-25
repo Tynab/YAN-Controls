@@ -15,7 +15,7 @@ namespace YAN_Controls
         private Color _onToggleColor = WhiteSmoke;
         private Color _offBackColor = Gray;
         private Color _offToggleColor = Gainsboro;
-        private bool _solidStyle = true;
+        private bool _is_SolidStyle = true;
         #endregion
 
         #region Constructors
@@ -71,10 +71,10 @@ namespace YAN_Controls
         [DefaultValue(true)]
         public bool SolidStyle
         {
-            get => _solidStyle;
+            get => _is_SolidStyle;
             set
             {
-                _solidStyle = value;
+                _is_SolidStyle = value;
                 Invalidate();
             }
         }
@@ -99,7 +99,7 @@ namespace YAN_Controls
             if (Checked)
             {
                 //draw the control surface
-                if (_solidStyle)
+                if (_is_SolidStyle)
                 {
                     graphics.FillPath(new SolidBrush(_onBackColor), GetFigurePath());
                 }
@@ -113,7 +113,7 @@ namespace YAN_Controls
             else
             {
                 //draw the control surface
-                if (_solidStyle)
+                if (_is_SolidStyle)
                 {
                     graphics.FillPath(new SolidBrush(_offBackColor), GetFigurePath());
                 }

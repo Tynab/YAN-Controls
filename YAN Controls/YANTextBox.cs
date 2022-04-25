@@ -22,7 +22,7 @@ namespace YAN_Controls
         private string _placeholderText = null;
         private int _borderSize = 2;
         private int _borderRadius = 0;
-        private bool _underlinedStyle = false;
+        private bool _is_UnderlinedStyle = false;
         private bool _is_Focus = false;
         private bool _is_Placeholder = false;
         private bool _is_PasswordChar = false;
@@ -32,7 +32,9 @@ namespace YAN_Controls
         public YANTextBox()
         {
             InitializeComponent();
-            textBoxMain.TextChanged += TextBoxMain_TextChanged;
+            //this
+            Resize += Ctrl_Resize;
+            //txt main
             textBoxMain.MouseEnter += TextBoxMain_MouseEnter;
             textBoxMain.MouseLeave += TextBoxMain_MouseLeave;
             textBoxMain.Enter += TextBoxMain_Enter;
@@ -40,7 +42,7 @@ namespace YAN_Controls
             textBoxMain.KeyDown += TextBoxMain_KeyDown;
             textBoxMain.KeyPress += TextBoxMain_KeyPress;
             textBoxMain.KeyUp += TextBoxMain_KeyUp;
-            Resize += Ctrl_Resize;
+            textBoxMain.TextChanged += TextBoxMain_TextChanged;
         }
         #endregion
 
@@ -149,10 +151,10 @@ namespace YAN_Controls
         [Category("YAN Appearance"), Description("When this property is true, the underline added to text.")]
         public bool UnderlinedStyle
         {
-            get => _underlinedStyle;
+            get => _is_UnderlinedStyle;
             set
             {
-                _underlinedStyle = value;
+                _is_UnderlinedStyle = value;
                 Invalidate();
             }
         }
@@ -244,7 +246,7 @@ namespace YAN_Controls
                                 {
                                     penBorder.Color = _borderFocusColor;
                                 }
-                                if (_underlinedStyle)
+                                if (_is_UnderlinedStyle)
                                 {
                                     //draw border smoothing
                                     graphics.DrawPath(penBorderSmooth, pathBorderSmooth);
@@ -274,7 +276,7 @@ namespace YAN_Controls
                     {
                         penBorder.Color = _borderFocusColor;
                     }
-                    if (_underlinedStyle)
+                    if (_is_UnderlinedStyle)
                     {
                         graphics.DrawLine(penBorder, 0, Height - 1, Width, Height - 1);
                     }
@@ -305,36 +307,11 @@ namespace YAN_Controls
         #endregion
 
         #region Events
-        //raises the text changed event
-        private void TextBoxMain_TextChanged(object sender, EventArgs e)
-        {
-            if (TxtChanged != null)
-            {
-                TxtChanged.Invoke(sender, e);
-            }
-        }
-
         //raises the mouse enter event
         private void TextBoxMain_MouseEnter(object sender, EventArgs e) => OnMouseEnter(e);
 
         //raises the mouse leave event
         private void TextBoxMain_MouseLeave(object sender, EventArgs e) => OnMouseLeave(e);
-
-        //raises the key press event
-        private void TextBoxMain_KeyPress(object sender, KeyPressEventArgs e) => OnKeyPress(e);
-
-        //raises the key down event
-        private void TextBoxMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            OnKeyDown(e);
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-            }
-        }
-
-        //raises the key up event
-        private void TextBoxMain_KeyUp(object sender, KeyEventArgs e) => OnKeyUp(e);
 
         //raises the enter event
         private void TextBoxMain_Enter(object sender, EventArgs e)
@@ -350,6 +327,31 @@ namespace YAN_Controls
             _is_Focus = false;
             Invalidate();
             SetPlaceholder();
+        }
+
+        //raises the key press event
+        private void TextBoxMain_KeyPress(object sender, KeyPressEventArgs e) => OnKeyPress(e);
+
+        //raises the key down event
+        private void TextBoxMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            OnKeyDown(e);
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        //raises the key up event
+        private void TextBoxMain_KeyUp(object sender, KeyEventArgs e) => OnKeyUp(e);        
+
+        //raises the text changed event
+        private void TextBoxMain_TextChanged(object sender, EventArgs e)
+        {
+            if (TxtChanged != null)
+            {
+                TxtChanged.Invoke(sender, e);
+            }
         }
         #endregion
 
