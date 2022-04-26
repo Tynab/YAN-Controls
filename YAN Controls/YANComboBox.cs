@@ -375,5 +375,17 @@ namespace YAN_Controls
             };
         }
         #endregion
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // YANComboBox
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Name = "YANComboBox";
+            this.ResumeLayout(false);
+
+        }
     }
 }
